@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".log">
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:text="Sign in"
+        android:textSize="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="88dp"
+        android:layout_marginTop="38dp"
+        />
+
+    <Button
+        android:id="@+id/signinbutt"
+        android:layout_width="123dp"
+        android:layout_height="93dp"
+        android:text="Confirm"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="158dp"
+        android:layout_marginTop="360dp"/>
+
+    <Button
+        android:id="@+id/cancelbutt"
+        android:layout_width="123dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="158dp"
+        android:layout_marginTop="480dp"
+        android:text="Cancel" />
+
+    <EditText
+        android:id="@+id/passput"
+        android:layout_width="300dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="178dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/userinput"
+        android:layout_width="300dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="88dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

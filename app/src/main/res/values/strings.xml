@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Covid Tracker</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="trip_display_label">Trip Display</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="count_select">testes</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="title_activity_user">User</string>
+    <string name="login_text">Login Page</string>
+    <string name="usename_text">User Name</string>
+    <string name="password_text">Password</string>
+    <string name="attempts_text">Attempts :</string>
+    <string name="button_login">Login</string>
+    <string name="Secon_page_text">Welcome to the second page</string>
+    <string-array name="countries">
+        <item>uga</item>
+        <item>buga</item>
+        <item>guga</item>
+    </string-array>
+    <string name="title_activity_second">Second</string>
+    <string name="title_activity_trip_display">trip_display</string>
+    <string name="title_activity_log">log</string>
+    <string name="title_activity_panel">panel</string>
+</resources>
