@@ -37,8 +37,7 @@ public class log extends AppCompatActivity {
             public void onClick(View v) { //When the login button receives input...
                 if (username.getText().toString().equals("awesomearin") && passcode.getText().toString().equals("pchandra77")) { //if correct, take user to the broken panel page
                     Toast.makeText(v.getContext(), "Success!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(v.getContext(), MainActivity.class));
-                    finish();
+                    startActivity(new Intent(v.getContext(), management.class));
                 } else { //If wrong, display error Toast message and leave the user on the page, befuddled by their mistakes
                     Toast.makeText(v.getContext(), "Try again...", Toast.LENGTH_LONG).show();
                 }
