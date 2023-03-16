@@ -23,7 +23,11 @@ import androidx.core.app.NotificationManagerCompat;
 import android.view.View;
 
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Stack;
 import java.util.Timer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView tv;
     public String watcher;
     public int tims;
-    boolean playnotif = false;
+
 
 
 
@@ -48,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         tv = findViewById(R.id.stopwatch);
         Bundle gettimer = getIntent().getExtras();
-
+        Button recos = findViewById(R.id.recs);
         if (gettimer != null) { //if there is something in bundy, extract it and put into actual1 and actual2
             watcher = gettimer.getString("time");
+            String watching = watcher;
             tims = Integer.parseInt(watcher);
             final ScheduledExecutorService ses =  Executors.newScheduledThreadPool(1);
             final Runnable runitdown = new Runnable() {
@@ -59,37 +64,28 @@ public class MainActivity extends AppCompatActivity {
                     if (watcher != null) {
                         watcher = String.valueOf(tims);
                         tv.setText(watcher);
+
                     }
                     tims--;
                     if (tims < 0) {
                         System.out.println("Time's up!!");
-                        tv.setText("Stop!");
-                        playnotif=true;
-                        ses.shutdown();
-                        if (playnotif == true) {
-                            System.out.println("hello");
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                NotificationChannel nc =  new NotificationChannel("My backup notif", "Alert!", NotificationManager.IMPORTANCE_DEFAULT);
-                                NotificationManager manager =  getSystemService(NotificationManager.class);
-                                manager.createNotificationChannel(nc);
+                        recos.setVisibility(View.VISIBLE);
+                        recos.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                addNotification("Time", watching);
                             }
-                            NotificationCompat.Builder ncb = new NotificationCompat.Builder(MainActivity.this, "My Notif");
-                            ncb.setContentTitle("Time is Up!");
-                            ncb.setContentText("You have exceeded your time limit!");
-                            ncb.setSmallIcon(R.drawable.ic_launcher_background);
-                            ncb.setAutoCancel(true);
-
-                            NotificationManagerCompat nmc = NotificationManagerCompat.from(MainActivity.this);
-                            nmc.notify(1, ncb.build());
-                        }
+                        });
+                        tv.setText("Stop!");
+                        ses.shutdown();
                     }
                 }
 
             };
-
             ses.scheduleAtFixedRate(runitdown, 0, 1, SECONDS);
+        } else {
+            recos.setVisibility(View.GONE);
         }
-
 
 
         binding.adminaccess.setOnClickListener(new View.OnClickListener(){
@@ -111,6 +107,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    private void addNotification(String tile, String mess) {
+        String message = "BLANK...";
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("YOUR_CHANNEL_ID",
+                    "YOUR_CHANNEL_NAME",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DESCRIPTION");
+            mNotificationManager.createNotificationChannel(channel);
+        }
+        if (Integer.parseInt(mess) >= 10) {
+            message = "In " + Integer.parseInt(mess) + " seconds, you could have walked around a little!";
+        } else if (Integer.parseInt(mess) >=60) {
+            message = "In " + Integer.parseInt(mess) + " seconds, you could have solved a math problem!";
+        } else if (Integer.parseInt(mess) >= 120) {
+            message = "In " + Integer.parseInt(mess) + "seconds, you could have listened to some music!";
+        }
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "YOUR_CHANNEL_ID")
+                .setSmallIcon(R.mipmap.ic_launcher) // notification icon
+                .setContentTitle(tile) // title for notification
+                .setContentText(message)// message for notification
+                .setAutoCancel(true); // clear notification after click
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
+        mBuilder.setContentIntent(pi);
+        mNotificationManager.notify(0, mBuilder.build());
+    }
 
 }

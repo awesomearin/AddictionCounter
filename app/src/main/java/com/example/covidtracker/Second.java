@@ -30,11 +30,9 @@ public class Second extends AppCompatActivity {
         binding = ActivitySecondBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Spinner spinnercountries; //declared spinners and connects them to xml counterparts
-        Spinner countselect2 = findViewById(R.id.count_select2);
         spinnercountries = (Spinner) findViewById(R.id.count_select);
         ArrayAdapter<String> countadapt = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, times); //adapts the array (duh) and applies it to the spinners
         spinnercountries.setAdapter(countadapt);
-        countselect2.setAdapter(countadapt);
 
         binding.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
